@@ -1,13 +1,13 @@
 {
   "name": "react-heroicons-picker",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "An icon picker for HeroIcons",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "swc ./src -d ./dist/",
-    "start": "swc ./src -d ./dist/ -w"
+    "build": "tsc --declaration --jsx react --outDir dist --lib es2015,dom ./src/index.tsx",
+    "start": "tsc --declaration --jsx react --outDir dist --lib es2015,dom -w ./src/index.tsx"
   },
   "repository": {
     "type": "git",

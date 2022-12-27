@@ -77,8 +77,4 @@ const IconPicker: React.FC<IconPickerProps> = ({
   )
 }
 
-IconPicker.defaultProps = {
-  hideSearch: false,
-}
-
 export { IconPicker }
