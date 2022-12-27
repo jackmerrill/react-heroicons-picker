@@ -1,20 +1,13 @@
-import * as React from 'react'
-import styled from 'styled-components'
 import { IconPickerItem, iconList } from '.'
 import { useState, useEffect, useRef } from 'react'
-import * as CSS from 'csstype'
 import { IconList } from './iconType'
+import * as React from 'react'
 
 interface IconPickerProps {
   value: IconList
   library: 'outline' | 'solid' | 'mini'
   onChange: (value: IconList) => void
   hideSearch?: boolean
-  containerStyles?: CSS.Properties
-  buttonStyles?: CSS.Properties
-  buttonIconStyles?: CSS.Properties
-  pickerIconStyles?: CSS.Properties
-  searchInputStyles?: CSS.Properties
 }
 
 const IconPicker: React.FC<IconPickerProps> = ({
@@ -22,11 +15,6 @@ const IconPicker: React.FC<IconPickerProps> = ({
   library,
   onChange,
   hideSearch,
-  containerStyles,
-  buttonStyles,
-  buttonIconStyles,
-  pickerIconStyles,
-  searchInputStyles,
 }) => {
   const ref = useRef(null)
   const [display, changeDisplay] = useState(false)
@@ -48,20 +36,20 @@ const IconPicker: React.FC<IconPickerProps> = ({
     setSearchString(event.target.value)
   }
   return (
-    <Container style={buttonStyles} ref={ref} onClick={() => buttonClick()}>
-      <IconPickerItem
-        containerStyles={buttonIconStyles}
-        icon={value}
-        library={library}
-      />
+    <div
+      className="relative p-2 w-12 min-h-[40px] rounded-md border-1 border-blac flex justify-center items-center hover:cursor-pointer"
+      ref={ref}
+      onClick={() => buttonClick()}
+    >
+      <IconPickerItem icon={value} library={library} />
       {display && (
-        <PickerContainer
-          style={containerStyles}
+        <div
+          className="absolute top-12 flex flex-row flex-wrap overflow-y-scroll bg-white p-2 w-52 max-h-96 rounded-md border-2 border-black z-10"
           onClick={(e) => e.stopPropagation()}
         >
           {!hideSearch && (
-            <AppInput
-              style={searchInputStyles}
+            <input
+              className="w-full"
               onChange={onChangeSearch}
               value={searchString}
               placeholder="Search"
@@ -76,7 +64,6 @@ const IconPicker: React.FC<IconPickerProps> = ({
                 key={icon}
                 library={library}
                 icon={icon}
-                containerStyles={pickerIconStyles}
                 onClick={(value: IconList) => {
                   onChange(value)
                   changeDisplay(false)
@@ -84,53 +71,14 @@ const IconPicker: React.FC<IconPickerProps> = ({
                 }}
               />
             ))}
-        </PickerContainer>
+        </div>
       )}
-    </Container>
+    </div>
   )
 }
 
 IconPicker.defaultProps = {
   hideSearch: false,
 }
-
-const Container = styled.div`
-  position: relative;
-  padding: 5px;
-  width: 50px;
-  min-height: 40px;
-  border-radius: 4px;
-  border-width: 1px;
-  border-color: #000;
-  border-style: solid;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  :hover {
-    cursor: pointer;
-  }
-`
-
-const PickerContainer = styled.div`
-  position: absolute;
-  top: 45px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  overflow-y: scroll;
-  background-color: #fff;
-  padding: 5px;
-  width: 200px;
-  max-height: 300px;
-  border-radius: 4px;
-  border-width: 2px;
-  border-color: #000;
-  border-style: solid;
-  z-index: 10;
-`
-
-const AppInput = styled.input`
-  width: 100%;
-`
 
 export { IconPicker }

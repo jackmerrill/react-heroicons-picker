@@ -2,7 +2,6 @@ import * as React from 'react'
 import * as HeroIconOutline from '@heroicons/react/24/outline'
 import * as HeroIconSolid from '@heroicons/react/24/solid'
 import * as HeroIconMini from '@heroicons/react/20/solid'
-import * as CSS from 'csstype'
 import { IconList } from '.'
 
 interface IconPickerItemProps {
@@ -11,7 +10,6 @@ interface IconPickerItemProps {
   size?: number
   color?: string
   onClick?: (icon: string) => void
-  containerStyles?: CSS.Properties
 }
 
 const IconPickerItem: React.FC<IconPickerItemProps> = ({
@@ -20,7 +18,6 @@ const IconPickerItem: React.FC<IconPickerItemProps> = ({
   size,
   color,
   onClick,
-  containerStyles,
 }) => {
   const libraryToUse =
     library === 'outline'
@@ -33,7 +30,7 @@ const IconPickerItem: React.FC<IconPickerItemProps> = ({
   return (
     <div
       onClick={() => !!onClick && onClick(icon)}
-      style={{ fontSize: size, color: color, padding: 2, ...containerStyles }}
+      style={{ fontSize: size, color: color, padding: 2 }}
     >
       {iconDiv}
     </div>
