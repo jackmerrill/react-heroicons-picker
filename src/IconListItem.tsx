@@ -37,10 +37,4 @@ const IconPickerItem: React.FC<IconPickerItemProps> = ({
   )
 }
 
-IconPickerItem.defaultProps = {
-  color: '#000',
-  size: 24,
-  onClick: (_: string) => {},
-}
-
 export { IconPickerItem }
