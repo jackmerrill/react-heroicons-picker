@@ -7,6 +7,7 @@ import { IconList } from './iconType'
 
 interface IconPickerProps {
   value: IconList
+  library: 'outline' | 'solid' | 'mini'
   onChange: (value: IconList) => void
   hideSearch?: boolean
   containerStyles?: CSS.Properties
@@ -16,8 +17,9 @@ interface IconPickerProps {
   searchInputStyles?: CSS.Properties
 }
 
-const IconPicker: React.SFC<IconPickerProps> = ({
+const IconPicker: React.FC<IconPickerProps> = ({
   value,
+  library,
   onChange,
   hideSearch,
   containerStyles,
@@ -47,7 +49,11 @@ const IconPicker: React.SFC<IconPickerProps> = ({
   }
   return (
     <Container style={buttonStyles} ref={ref} onClick={() => buttonClick()}>
-      <IconPickerItem containerStyles={buttonIconStyles} icon={value} />
+      <IconPickerItem
+        containerStyles={buttonIconStyles}
+        icon={value}
+        library={library}
+      />
       {display && (
         <PickerContainer
           style={containerStyles}
@@ -68,6 +74,7 @@ const IconPicker: React.SFC<IconPickerProps> = ({
             .map((icon: IconList) => (
               <IconPickerItem
                 key={icon}
+                library={library}
                 icon={icon}
                 containerStyles={pickerIconStyles}
                 onClick={(value: IconList) => {
