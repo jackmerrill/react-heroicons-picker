@@ -15,8 +15,7 @@ interface IconPickerItemProps {
 const IconPickerItem: React.FC<IconPickerItemProps> = ({
   icon,
   library,
-  size,
-  color,
+  size = 6,
   onClick,
 }) => {
   const libraryToUse =
@@ -25,12 +24,11 @@ const IconPickerItem: React.FC<IconPickerItemProps> = ({
       : library === 'solid'
       ? HeroIconSolid
       : HeroIconMini
-
   const iconDiv = !!icon ? React.createElement(libraryToUse[icon]) : <div />
   return (
     <div
       onClick={() => !!onClick && onClick(icon)}
-      style={{ fontSize: size, color: color, padding: 2 }}
+      className={`w-${size} h-${size} col-span-1`}
     >
       {iconDiv}
     </div>
