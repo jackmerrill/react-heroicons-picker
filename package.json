@@ -1,6 +1,6 @@
 {
   "name": "react-heroicons-picker",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "An icon picker for HeroIcons",
   "type": "module",
   "main": "dist/index.js",
